@@ -28,7 +28,7 @@ get "/*" do
 
   scraper.search("#msgs div.msg").each do |msg|
     _id =  msg.attr("id")
-    items << {  :_id => _id,   :link => "#{thread_link}##{_id}",  :title => (msg/".author span").text,  :description => (msg/".mb.cb").text,  :pub_date => (msg/"#hdn_date").attr("value")}
+    items << {  :_id => _id,   :link => "#{thread_link}##{_id}",  :title => (msg/".author span").text,  :description => (msg/".mb.cb div"),  :pub_date => (msg/"#hdn_date").attr("value")}
   end
 
   rss  = '<?xml version="1.0"?>'
