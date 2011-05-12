@@ -2,6 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     addressable (2.2.3)
+    daemons (1.1.2)
     data_objects (0.10.2)
       addressable (~> 2.1)
     diff-lcs (1.1.2)
@@ -16,8 +17,10 @@ GEM
       do_sqlite3 (~> 0.10.2)
     do_sqlite3 (0.10.2)
       data_objects (= 0.10.2)
+    eventmachine (0.12.10)
     extlib (0.9.15)
     haml (3.0.25)
+    nokogiri (1.4.4)
     rack (1.2.1)
     rack-test (0.5.7)
       rack (>= 1.0)
@@ -33,6 +36,10 @@ GEM
     sinatra (1.1.2)
       rack (~> 1.1)
       tilt (~> 1.2)
+    thin (1.2.11)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     tilt (1.2.2)
 
 PLATFORMS
@@ -42,7 +49,9 @@ DEPENDENCIES
   dm-core
   dm-sqlite-adapter
   haml
+  nokogiri
   rack-test
   rcov
   rspec (>= 2.0)
   sinatra
+  thin
