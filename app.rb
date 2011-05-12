@@ -28,11 +28,11 @@ get "/*" do
 
   scraper.search("#msgs div.msg").each do |msg|
     _id =  msg.attr("id")
-    items << {  :_id => _id,   :link => "#{thread_link}##{_id}",  :title => (msg/".author span").text,  :description => (msg/".mb.cb div"),  :pub_date => (msg/"#hdn_date").attr("value")}
+    items << {  :_id => _id,   :link => "#{thread_link}##{_id}",  :title => (msg/".author span").text,  :description => (msg/".mb.cb div").to_xml(:indent => 5, :encoding => 'UTF-8' ),  :pub_date => (msg/"#hdn_date").attr("value")}
   end
 
   rss  = '<?xml version="1.0"?>'
-  rss += '<rss version="2.0">'
+  rss += '<rss version="2.0"  charset="utf-8">'
   rss += "<channel><title>#{title}</title><link>#{thread_link}</link><description>#{title}</description><pubDate>#{items[0][:pub_date]}</pubDate><lastBuildDate>#{items.reverse[0][:pub_date]}</lastBuildDate>"
 
   items.each do |item|
