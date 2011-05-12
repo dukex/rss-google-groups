@@ -28,7 +28,7 @@ get "/*" do
 
   scraper.search("#msgs div.msg").each do |msg|
     _id =  msg.attr("id")
-    items << {  :_id => _id,   :link => "#{thread_link}##{_id}",  :title => (msg/".author span").text,  :description => (msg/".mb.cb div").to_xml(:indent => 5, :encoding => 'UTF-8' ),  :pub_date => (msg/"#hdn_date").attr("value")}
+    items << {  :_id => _id,   :link => "#{thread_link}##{_id}",  :title => (msg/".author span").text,  :description => (msg/".mb.cb div"),  :pub_date => (msg/"#hdn_date").attr("value")}
   end
 
   rss  = '<?xml version="1.0"?>'
@@ -37,11 +37,11 @@ get "/*" do
 
   items.each do |item|
     rss += "<item>
-         <title>#{item[:title]}</title>
+         <title>#{item[:title]} disse: #{item[:description].text[0..30]}...</title>
          <link>#{item[:link]}</link>
-         <description><![CDATA[#{item[:description]}]]></description>
+         <description><![CDATA[#{item[:description].to_xml(:indent => 5, :encoding =>'UTF-8')}]]></description>
          <pubDate>#{item[:pub_date]}</pubDate>
-         <guid>#{item[:_id]}</guid>
+         <guid>#{item[:link]}</guid>
       </item>"
   end
   rss += '</channel></rss>'
