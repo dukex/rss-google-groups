@@ -33,13 +33,13 @@ get "/*" do
 
   rss  = '<?xml version="1.0"?>'
   rss += '<rss version="2.0">'
-  rss += "<channel><title>#{title}</title><link>#{thread_link}</link><description>XXXXX</description><pubDate>#{items[0][:pub_date]}</pubDate><lastBuildDate>#{items.reverse[0][:pub_date]}</lastBuildDate>"
+  rss += "<channel><title>#{title}</title><link>#{thread_link}</link><description>#{title}</description><pubDate>#{items[0][:pub_date]}</pubDate><lastBuildDate>#{items.reverse[0][:pub_date]}</lastBuildDate>"
 
   items.each do |item|
     rss += "<item>
          <title>#{item[:title]}</title>
          <link>#{item[:link]}</link>
-         <description>#{item[:description]}</description>
+         <description><![CDATA[#{item[:description]}]]></description>
          <pubDate>#{item[:pub_date]}</pubDate>
          <guid>#{item[:_id]}</guid>
       </item>"
